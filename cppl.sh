@@ -27,8 +27,8 @@ print_usage() {
 # Function to create symbolic links for copilot-plus and rules
 create_links() {
     local rules_suffix=$1
-    ln -sf "${COPILOT_PLUS_PATH}/copilot-plus" .copilot-plus
-    ln -sf "${COPILOT_PLUS_PATH}/copilot-plus/system-prompt.md" ".${rules_suffix}rules"
+    [ ! -e ".copilot-plus" ] && ln -sf "${COPILOT_PLUS_PATH}/copilot-plus" .copilot-plus
+    [ ! -e ".${rules_suffix}rules" ] && ln -sf "${COPILOT_PLUS_PATH}/copilot-plus/system-prompt.md" ".${rules_suffix}rules"
     handle_thinking
     echo "Created symbolic links for copilot-plus and ${rules_suffix} rules"
 }
@@ -45,20 +45,26 @@ handle_thinking() {
     if [ "$1" = "ls" ]; then
         # List all files except changelog.md
         find "$instruction_dir" -type f -name "*.md" ! -name "changelog.md" -exec basename {} \;
-    elif [ -n "$1" ] && [ -f "$instruction_dir/$1" ]; then
-        # Link specific file
-        ln -sf "$instruction_dir/$1" .tc.md
-        echo "Linked $1 as .tc.md"
     else
-        # Link default version
-        ln -sf "$instruction_dir/${THINKING_CLAUDE_VERSION}" .tc.md
-        echo "Linked ${THINKING_CLAUDE_VERSION} as .tc.md"
+        if [ -e ".tc.md" ]; then
+            rm .tc.md
+            echo "Remove exist .tc.md"
+        fi
+        if [ -n "$1" ] && [ -f "$instruction_dir/$1" ]; then
+            # Link specific file
+            ln -sf "$instruction_dir/$1" .tc.md
+            echo "Linked $1 as .tc.md"
+        else
+            # Link default version
+            ln -sf "$instruction_dir/${THINKING_CLAUDE_VERSION}" .tc.md
+            echo "Linked ${THINKING_CLAUDE_VERSION} as .tc.md"
+        fi
     fi
 }
 
 # Function to setup vscode environment
 setup_vscode() {
-    ln -sf "${COPILOT_PLUS_PATH}/copilot-plus" .copilot-plus
+    [ ! -e ".copilot-plus" ] && ln -sf "${COPILOT_PLUS_PATH}/copilot-plus" .copilot-plus
     if [ ! -f "prompts.md" ]; then
         echo "# System Prompt" > prompts.md
         cat "${COPILOT_PLUS_PATH}/copilot-plus/system-prompt.md" >> prompts.md
