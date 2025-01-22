@@ -1,25 +1,28 @@
-# Instructions
+## Instructions
 
-Always includes `./copilot-plus/thinking-claude.md` the content in the prompts.
+Includes `.tc.md` content as the part of the first prompt.
 
 Even user ask in other lanaguage, you should always reply in English.
 
-During you interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `lessons.md` file so you will not make the same mistake again. 
+During you interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `./.copilot/lessons.md` file so you will not make the same mistake again. 
 
 You need to take care a prompt history file and a scratchpad file.
 - The prompt history file is `prompts.md`
 - The scratchpad file is `scratchpad.md`
 
-You should also create the prompt history file if not exist. Everytime the user input a prompt, you need to summarize a tile for the prompt and append it to the prompt history file in the follow markdown format:
+### Prompts File
+
+You need to create a `prompts.md` file if not exist. Everytime the user directly input a prompt, you need to summarize a tile for the prompt and append it to the prompt file `User Prompts` session in the following markdown format:
 ```markdown
-## Title
+## Summrize Prompt Title
 
 prompt content
 
 ```
-When user ask you to read the prompt from the prompt file, You don't need to update the prompt history file.
+When user ask you to read the prompt file, you should take the last user prompt in the prompt file as prompt.
 
-You should also create the scratchpad file if not exist. You use the a scratchpad in the to organize your thoughts. Especially when you receive a new task, you should first review the content of the scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
+### Scratchpad File
+You need to create a `scratchpad.md` file if not exist if the task is too complicated. The scratchpad file is a place to organize your thoughts. Especially when you receive a new task, you should first review the content of the scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
 [X] Task 1
 [ ] Task 2
 Also update the progress of the task in the Scratchpad when you finish a subtask.
@@ -27,11 +30,11 @@ Especially when you finished a milestone, it will help to improve your depth of 
 The goal is to help you maintain a big picture as well as the progress of the task. Always refer to the Scratchpad when you plan the next step.
 
 
-# Tools
+## Tools
 
 Note all the tools are in python. So in the case you need to do batch processing, you can always consult the python files and write your own script.
 
-## Screenshot Verification
+### Screenshot Verification
 The screenshot verification workflow allows you to capture screenshots of web pages and verify their appearance using LLMs. The following tools are available:
 
 1. Screenshot Capture:
@@ -61,7 +64,7 @@ response = query_llm(
 print(response)
 ```
 
-## LLM
+### LLM
 
 You always have an LLM at your side to help you with the task. For simple tasks, you could invoke the LLM by running the following command:
 ```
@@ -78,7 +81,7 @@ The LLM API supports multiple providers:
 
 But usually it's a better idea to check the content of the file and use the APIs in the `./copilot-plus/tools/llm_api.py` file to invoke the LLM if needed.
 
-## Web browser
+### Web browser
 
 You could use the `./copilot-plus/tools/web_scraper.py` file to scrape the web.
 ```
@@ -86,7 +89,7 @@ You could use the `./copilot-plus/tools/web_scraper.py` file to scrape the web.
 ```
 This will output the content of the web pages.
 
-## Search engine
+### Search engine
 
 You could use the `./copilot-plus/tools/search_engine.py` file to search the web.
 ```
@@ -99,20 +102,3 @@ Title: This is the title of the search result
 Snippet: This is a snippet of the search result
 ```
 If needed, you can further use the `web_scraper.py` file to scrape the web page content.
-
-# Lessons
-
-## User Specified Lessons
-
-- You have a python venv in ./.venv.
-- Include info useful for debugging in the program output.
-- Read the file before you try to edit it.
-- Use LLM to perform flexible text understanding tasks. First test on a few files. After success, make it parallel.
-
-## Cursor learned
-
-- For website image paths, always use the correct relative path (e.g., 'images/filename.png') and ensure the images directory exists
-- For search results, ensure proper handling of different character encodings (UTF-8) for international queries
-- Add debug information to stderr while keeping the main output clean in stdout for better pipeline integration
-- When using seaborn styles in matplotlib, use 'seaborn-v0_8' instead of 'seaborn' as the style name due to recent seaborn version changes
-
