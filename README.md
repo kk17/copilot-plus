@@ -1,7 +1,8 @@
-# Devin.cursorrules
+# Copilot Plus
 
-Transform your $20 Cursor/Windsurf into a Devin-like experience in one minute! This repository contains configuration files and tools that enhance your Cursor or Windsurf IDE with advanced agentic AI capabilities similar to Devin, including:
+Transform your Cursor/Windsurf/VSCode/Trae AI copilot into a Devin-like experience in one minute! This repository contains configuration files and tools that enhance your IDE with advanced agentic AI capabilities similar to Devin, including:
 
+- Thinking-Claude: Chain of thoughts System Prompt
 - Process planning and self-evolution
 - Extended tool usage (web browsing, search, LLM-powered analysis)
 - Automated execution (for Windsurf in Docker containers)
@@ -12,34 +13,35 @@ Transform your $20 Cursor/Windsurf into a Devin-like experience in one minute! T
 ```bash
 ln -s copilot-plus .copilot-plus
 # Create a virtual environment in ./.venv
-python3 -m venv ./.copilot-plus/.venv
+python3 -m venv ./copilot-plus/.venv
 
 # Activate the virtual environment
 # On Unix/macOS:
-source ./.copilot-plus/.venv/bin/activate
-# On Windows:
-.\.venv\Scripts\activate
+source ./copilot-plus/.venv/bin/activate
 ```
 
 1. Install dependencies:
 ```bash
 # Install required packages
-pip install -r ./.copilot-plus/requirements.txt
+pip install -r ./copilot-plus/requirements.txt
 
 # Install Playwright's Chromium browser (required for web scraping)
 python -m playwright install chromium
 ```
 
-2. Install cpp(copilot-plus) command:
-Run `./setup-cpp.sh` to install the cpp command
+2. Install cppl(copilot-plus) command:
+```
+ln -s $PWD/cppl.sh ~/.local/bin/cppl
+```
 
 ## Usage
 Link copilot-plus to your project:
 ```bash
-cpp cursor
-cpp windsurf
-cpp thinking
+cppl cursor
+cppl windsurf
+cppl thinking
 ```
+Have fun!
 
 ## Tools Included
 

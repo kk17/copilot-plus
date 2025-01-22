@@ -27,8 +27,8 @@ print_usage() {
 # Function to create symbolic links for copilot-plus and rules
 create_links() {
     local rules_suffix=$1
-    [ ! -e ".copilot-plus" ] && ln -sf "${COPILOT_PLUS_PATH}/copilot-plus" .copilot-plus
-    [ ! -e ".${rules_suffix}rules" ] && ln -sf "${COPILOT_PLUS_PATH}/copilot-plus/system-prompt.md" ".${rules_suffix}rules"
+    [ ! -e ".copilot-plus" ] && ln -s "${COPILOT_PLUS_PATH}/copilot-plus" .copilot-plus
+    [ ! -e ".${rules_suffix}rules" ] && ln -s "${COPILOT_PLUS_PATH}/copilot-plus/system-prompt.md" ".${rules_suffix}rules"
     handle_thinking
     echo "Created symbolic links for copilot-plus and ${rules_suffix} rules"
 }
@@ -52,11 +52,11 @@ handle_thinking() {
         fi
         if [ -n "$1" ] && [ -f "$instruction_dir/$1" ]; then
             # Link specific file
-            ln -sf "$instruction_dir/$1" .tc.md
+            ln -s "$instruction_dir/$1" .tc.md
             echo "Linked $1 as .tc.md"
         else
             # Link default version
-            ln -sf "$instruction_dir/${THINKING_CLAUDE_VERSION}" .tc.md
+            ln -s "$instruction_dir/${THINKING_CLAUDE_VERSION}" .tc.md
             echo "Linked ${THINKING_CLAUDE_VERSION} as .tc.md"
         fi
     fi
@@ -64,7 +64,7 @@ handle_thinking() {
 
 # Function to setup vscode environment
 setup_vscode() {
-    [ ! -e ".copilot-plus" ] && ln -sf "${COPILOT_PLUS_PATH}/copilot-plus" .copilot-plus
+    [ ! -e ".copilot-plus" ] && ln -s "${COPILOT_PLUS_PATH}/copilot-plus" .copilot-plus
     if [ ! -f "prompts.md" ]; then
         echo "# System Prompt" > prompts.md
         cat "${COPILOT_PLUS_PATH}/copilot-plus/system-prompt.md" >> prompts.md
