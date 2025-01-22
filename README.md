@@ -9,38 +9,28 @@ Transform your Cursor/Windsurf/VSCode/Trae AI copilot into a Devin-like experien
 
 ## Setup
 
-1. Create Python virtual environment:
+Choose the appropriate setup script for your operating system:
+
+### Linux/macOS
 ```bash
-ln -s copilot-plus .copilot-plus
-# Create a virtual environment in ./.venv
-python3 -m venv ./copilot-plus/.venv
-
-# Activate the virtual environment
-# On Unix/macOS:
-source ./copilot-plus/.venv/bin/activate
+# Run the setup script
+./setup.sh
 ```
 
-1. Install dependencies:
-```bash
-# Install required packages
-pip install -r ./copilot-plus/requirements.txt
-
-# Install Playwright's Chromium browser (required for web scraping)
-python -m playwright install chromium
+### Windows
+```batch
+# Run the setup script
+setup.bat
 ```
 
-2. Install cppl(copilot-plus) command:
-```
-ln -s $PWD/cppl.sh ~/.local/bin/cppl
-```
+The setup script will:
+1. Create and configure the Python virtual environment
+2. Install required dependencies
+3. Install Playwright's Chromium browser
+4. Install the `cppl` command and check PATH configuration
 
 ## Usage
-Link copilot-plus to your project:
-```bash
-cppl cursor
-cppl windsurf
-cppl thinking
-```
+check `cppl help`
 Have fun!
 
 ## Tools Included
@@ -56,10 +46,10 @@ The project includes comprehensive unit tests for all tools. To run the tests:
 
 ```bash
 # Make sure you're in the virtual environment
-source ./.copilot-plus/.venv/bin/activate  # On Windows: .\.venv\Scripts\activate
+source ./copilot-plus/.venv/bin/activate  # On Windows: .\copilot-plus\.venv\Scripts\activate
 
 # Run all tests
-PYTHONPATH=./.copilot-plus python -m unittest discover ./.copilot-plus/tests/
+PYTHONPATH=./copilot-plus python -m unittest discover ./copilot-plus/tests/
 ```
 
 The test suite includes:
