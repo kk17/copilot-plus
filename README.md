@@ -57,9 +57,8 @@ The test suite includes:
 - Web scraper tests (Playwright-based scraping)
 - LLM API tests (OpenAI integration)
 
-## Background
-
-For detailed information about the motivation and technical details behind this project, check out the blog post: [Turning $20 into $500 - Transforming Cursor into Devin in One Hour](https://yage.ai/cursor-to-devin-en.html)
+## Credit
+This project is inspired by and developed based on the work of [grapeot/devin.cursorrules: Magic to turn Cursor/Windsurf into 90% of Devin](https://github.com/grapeot/devin.cursorrules).
 
 ## License
 
