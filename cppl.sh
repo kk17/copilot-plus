@@ -21,6 +21,7 @@ print_usage() {
     echo "  thinking <filename.md> - Link specific model instruction file"
     echo "  code     - Setup VSCode environment with prompts.md"
     echo "  vscode   - Same as 'code' command"
+    echo "  trae     - Same as 'code' command"
     echo "  help     - Show this help message"
 }
 
@@ -68,7 +69,8 @@ setup_vscode() {
     if [ ! -f "prompts.md" ]; then
         echo "# System Prompt" > prompts.md
         cat "${COPILOT_PLUS_PATH}/copilot-plus/system-prompt.md" >> prompts.md
-        echo "\n# User Prompts" >> prompts.md
+        echo "" >> prompts.md
+        echo "# User Prompts" >> prompts.md
     fi
     handle_thinking
     echo "Setup VSCode environment completed"
@@ -82,7 +84,7 @@ case "$1" in
     windsurf)
         create_links "windsurf"
         ;;
-    code|vscode)
+    code|vscode|trae)
         setup_vscode
         ;;
     thinking)
